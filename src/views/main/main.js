@@ -7,6 +7,7 @@ import { CardList } from '../../components/card-list/card-list';
 export class MainView extends AbstractView {
   state = {
     list: [],
+    numFound: 0,
     loading: false,
     searchQuery: undefined,
     offset: 0,
@@ -20,9 +21,14 @@ export class MainView extends AbstractView {
     this.setTitle('Search Books');
   }
 
+  destroy() {
+    onChange.unsubscribe(this.appState);
+    onChange.unsubscribe(this.state);
+  }
+
   appStateHook(path) {
     if (path === 'favorites') {
-      console.log(path);
+      this.render();
     }
   }
 
@@ -36,8 +42,9 @@ export class MainView extends AbstractView {
       );
       this.state.loading = false;
       this.state.list = data.docs;
+      this.state.numFound = data.numFound;
     }
-    if (path === 'list' || path === 'loading') {
+    if (path === 'numFound' || path === 'loading') {
       this.render();
     }
   }
@@ -51,6 +58,9 @@ export class MainView extends AbstractView {
 
   render() {
     const main = document.createElement('div');
+    main.innerHTML = `
+    <h1>Books have - ${this.state.numFound}</h1>
+`;
     main.append(new Search(this.state).render());
     main.append(new CardList(this.appState, this.state).render());
     this.app.innerHTML = '';

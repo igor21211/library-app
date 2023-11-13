@@ -3,7 +3,7 @@ body {
 }
 :root {
   --black: #121212;
-  --while: #fafafa;
+  --white: #fafafa;
 }
 #root {
   max-width: 800px;
