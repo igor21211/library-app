@@ -1203,7 +1203,7 @@
 					class="search__input"
 					value="${this.state.searchQuery ? this.state.searchQuery : ''}"
 				/>
-				<img src="/static/search.svg" alt="Search icon" />
+				<img src="static/search.svg" alt="Search icon" />
 			</div>
 			<button aria-label="Search"><img src="static/searchWhite.svg" alt="Search icon" /></button>
     `;
